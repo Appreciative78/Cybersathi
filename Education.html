@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Loan Application</title>
+  <style>
+    /* General Reset and Background */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background:#121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Form Container */
+    .form-container {
+      background-color: #121212;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 700px;
+      margin: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Title */
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 25px;
+      font-weight: 600;
+      color: #4CAF50;
+    }
+
+    /* Label */
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    /* Input Fields */
+    input, select, textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      background-color: #262626;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border: 1px solid #4CAF50;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Textarea */
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    /* Footer Text */
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      color: #dcdcdc;
+    }
+
+    .footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Cyber Section */
+    .cyber-section {
+      margin-top: 40px;
+      background-color: #1d1d1d;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .cyber-section h2 {
+      color: #ff9800;
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cyber-section p {
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 25px;
+        margin: 10px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      button {
+        font-size: 16px;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      input, select, textarea {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <h1>Education Loan Application Form</h1>
+
+    <!-- Form Element -->
+    <form id="loanForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- Email Address -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+
+      <!-- Father's Name -->
+      <div class="form-group">
+        <label for="fatherName">Father's Name</label>
+        <input type="text" id="fatherName" name="fatherName" placeholder="Enter father's name" required>
+      </div>
+
+      <!-- Mother's Name -->
+      <div class="form-group">
+        <label for="motherName">Mother's Name</label>
+        <input type="text" id="motherName" name="motherName" placeholder="Enter mother's name" required>
+      </div>
+
+      <!-- Father's Occupation -->
+      <div class="form-group">
+        <label for="fatherOccupation">Father's Occupation</label>
+        <input type="text" id="fatherOccupation" name="fatherOccupation" placeholder="Enter father's occupation" required>
+      </div>
+
+      <!-- Mother's Occupation -->
+      <div class="form-group">
+        <label for="motherOccupation">Mother's Occupation</label>
+        <input type="text" id="motherOccupation" name="motherOccupation" placeholder="Enter mother's occupation" required>
+      </div>
+
+      <!-- Total Family Income -->
+      <div class="form-group">
+        <label for="familyIncome">Total Family Income (Annual)</label>
+        <input type="number" id="familyIncome" name="familyIncome" placeholder="Enter total family income" required>
+      </div>
+
+      <!-- Aadhar Card Number -->
+      <div class="form-group">
+        <label for="aadharNumber">Aadhar Card Number</label>
+        <input type="text" id="aadharNumber" name="aadharNumber" placeholder="Enter Aadhar card number" required>
+      </div>
+
+      <!-- PAN Number -->
+      <div class="form-group">
+        <label for="panNumber">PAN Number</label>
+        <input type="text" id="panNumber" name="panNumber" placeholder="Enter PAN number" required>
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="General">General</option>
+          <option value="OBC">OBC</option>
+          <option value="SC">SC</option>
+          <option value="ST">ST</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+      </div>
+
+      <!-- City -->
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+      </div>
+
+      <!-- State -->
+      <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" placeholder="Enter your state" required>
+      </div>
+
+      <!-- Course Name -->
+      <div class="form-group">
+        <label for="course">Course Name</label>
+        <input type="text" id="course" name="course" placeholder="Enter your course name" required>
+      </div>
+
+      <!-- University Name -->
+      <div class="form-group">
+        <label for="university">University/Institute Name</label>
+        <input type="text" id="university" name="university" placeholder="Enter your university name" required>
+      </div>
+
+      <!-- Loan Amount -->
+      <div class="form-group">
+        <label for="loanAmount">Loan Amount Needed</label>
+        <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
+      </div>
+
+      <!-- Purpose of Loan -->
+      <div class="form-group">
+        <label for="loanPurpose">Purpose of the Loan</label>
+        <textarea id="loanPurpose" name="loanPurpose" placeholder="Explain the purpose of your loan" required></textarea>
+      </div>
+
+      <!-- Course Duration -->
+      <div class="form-group">
+        <label for="courseDuration">Course Duration (Years)</label>
+        <input type="number" id="courseDuration" name="courseDuration" placeholder="Enter course duration in years" required>
+      </div>
+
+      <!-- Guarantor Information -->
+      <div class="form-group">
+        <label for="guarantorName">Guarantor Name (if applicable)</label>
+        <input type="text" id="guarantorName" name="guarantorName" placeholder="Enter guarantor's name (if applicable)">
+      </div>
+
+      <div class="form-group">
+        <label for="guarantorPhone">Guarantor Phone (if applicable)</label>
+        <input type="tel" id="guarantorPhone" name="guarantorPhone" placeholder="Enter guarantor's phone number (if applicable)">
+      </div>
+
+      <!-- Cyber Cafe Section -->
+      <div class="cyber-section">
+        <h2>Cyber Cafe Information (To be filled by Cyber)</h2>
+        <p>Please fill in the details below if you are a Cyber Cafe filling the form on behalf of the student.</p>
+
+        <!-- Cyber Name -->
+        <div class="form-group">
+          <label for="cyberName">Cyber Name</label>
+          <input type="text" id="cyberName" name="cyberName" placeholder="Enter Cyber Cafe name" required>
+        </div>
+
+        <!-- Cyber Email -->
+        <div class="form-group">
+          <label for="cyberEmail">Cyber Email</label>
+          <input type="email" id="cyberEmail" name="cyberEmail" placeholder="Enter Cyber Cafe email" required>
+        </div>
+
+        <!-- Form ID -->
+        <div class="form-group">
+          <label for="formId">Form ID</label>
+          <input type="text" id="formId" name="formId" placeholder="Enter Form ID" required>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>By submitting, you agree to our <a href="#">Terms & Conditions</a>.</p>
+    </div>
+  </div>
+
+  <script>
+    function submitForm() {
+      const formData = new FormData(document.getElementById('loanForm'));
+
+      const name = formData.get('name');
+      const fatherName = formData.get('fatherName');
+      const motherName = formData.get('motherName');
+      const fatherOccupation = formData.get('fatherOccupation');
+      const motherOccupation = formData.get('motherOccupation');
+      const income = formData.get('income');
+      const aadhaar = formData.get('aadhaar');
+      const pan = formData.get('pan');
+      const category = formData.get('category');
+      const address = formData.get('address');
+      const city = formData.get('city');
+      const state = formData.get('state');
+      const email = formData.get('email');
+      const cyberName = formData.get('cyberName');
+      const cyberEmail = formData.get('cyberEmail');
+      const formId = formData.get('formId');
+
+      google.script.run.withSuccessHandler(function(applicationNumber) {
+        alert('Form submitted successfully. Application Number: ' + applicationNumber);
+      }).submitLoanForm({
+        name, fatherName, motherName, fatherOccupation, motherOccupation, income,
+        aadhaar, pan, category, address, city, state, email, cyberName, cyberEmail, formId
+      });
+    }
+  </script>
+
+</body>
+</html>

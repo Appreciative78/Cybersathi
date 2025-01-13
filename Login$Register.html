@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Register</title>
+  <style>
+    body {
+      background-color: #181818;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+      width: 300px;
+      display: none;
+    }
+
+    .form-container.active {
+      display: block;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to right, #007bff, #00d4ff);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .toggle-link a {
+      color: #00d4ff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .toggle-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Form -->
+  <div class="form-container active" id="login-form">
+    <h2>Login</h2>
+    <form onsubmit="loginUser(event)">
+      <input type="email" id="log-email" placeholder="Enter your email" required />
+      <input type="password" id="log-password" placeholder="Enter your password" required />
+      <button type="submit">Login</button>
+    </form>
+    <div class="toggle-link">
+      Don't have an account? <a onclick="toggleForm('register-form')">Register here</a>
+    </div>
+  </div>
+
+  <!-- Register Form -->
+  <div class="form-container" id="register-form">
+    <h2>Register</h2>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="reg-name" placeholder="Full Name" required />
+      <input type="email" id="reg-email" placeholder="Email" required />
+      <input type="password" id="reg-password" placeholder="Password" required />
+      <input type="text" id="reg-number" placeholder="Phone Number" required />
+      <input type="text" id="reg-form-id" placeholder="Form ID (ABCDE12345)" required />
+      <button type="submit">Register</button>
+    </form>
+    <div class="toggle-link">
+      Already have an account? <a onclick="toggleForm('login-form')">Login here</a>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Firebase Configuration
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+
+    const firebaseConfig = {
+            apiKey: "AIzaSyBW2yv1wTWDktxyd0SNhqgMNL4cv-ld4t0",
+            authDomain: "loginsystem-9e5b7.firebaseapp.com",
+            databaseURL: "https://loginsystem-9e5b7-default-rtdb.firebaseio.com",
+            projectId: "loginsystem-9e5b7",
+            storageBucket: "loginsystem-9e5b7.appspot.com",
+            messagingSenderId: "339349560166",
+            appId: "1:339349560166:web:26fe016ee2927e854986a7"
+        };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // Register User
+    window.registerUser = function (event) {
+      event.preventDefault();
+      const name = document.getElementById("reg-name").value;
+      const email = document.getElementById("reg-email").value;
+      const password = document.getElementById("reg-password").value;
+      const number = document.getElementById("reg-number").value;
+      const formId = document.getElementById("reg-form-id").value;
+
+      if (!number.match(/^\d{10}$/)) {
+        alert("Enter a valid 10-digit phone number.");
+        return;
+      }
+      if (!formId.match(/^[A-Za-z]{5}\d{5}$/)) {
+        alert("Form ID must contain 5 letters and 5 digits.");
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          const userId = userCredential.user.uid;
+          set(ref(db, 'users/' + userId), { username: name, email, phoneNumber: number, formId: formId })
+            .then(() => {
+              localStorage.setItem("userData", JSON.stringify({ username: name, email, phoneNumber: number, formId: formId, uid: userId }));
+              window.location.href = "dashboard.html";
+            });
+        })
+        .catch(error => alert(error.message));
+    };
+
+    // Login User
+    window.loginUser = function (event) {
+      event.preventDefault();
+      const email = document.getElementById("log-email").value;
+      const password = document.getElementById("log-password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          const userId = userCredential.user.uid;
+          get(ref(db, 'users/' + userId)).then(snapshot => {
+            if (snapshot.exists()) {
+              localStorage.setItem("userData", JSON.stringify({ ...snapshot.val(), uid: userId }));
+              window.location.href = "dashboard.html";
+            }
+          });
+        })
+        .catch(error => alert(error.message));
+    };
+
+    // Toggle Forms
+    window.toggleForm = function (formId) {
+      document.getElementById("login-form").classList.remove("active");
+      document.getElementById("register-form").classList.remove("active");
+      document.getElementById(formId).classList.add("active");
+    };
+  </script>
+</body>
+</html>

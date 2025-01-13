@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced User Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background: #121212;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #e60000;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: -20px;
+        }
+
+        .dashboard-box {
+            background-color: #1e1e2f;
+            width: 100%;
+            max-width: 700px;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .dashboard-box h2 {
+            color: #4caf50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .info p {
+            margin: 10px 0;
+        }
+
+        .info strong {
+            color: #fff;
+        }
+
+        .info span {
+            color: #4caf50;
+            font-weight: 500;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #2a2a3d;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1 1 calc(45% - 20px);
+            max-width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .card button:hover {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+        }
+
+        .form-section {
+            background-color: #1e1e2f;
+            width: 91.5%;
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: none; /* Initially hide the form */
+        }
+
+        .form-section h3 {
+            color: #4caf50;
+            font-size: 24px;
+            margin-bottom: 7px;
+            text-align: center;
+        }
+
+        .form-section input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-section button {
+            width: 103%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-section button:hover {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+        }
+
+        .hb {
+            width:40%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-right: 80%;
+            font-weight: bold;
+        }
+
+        .hb:hover {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CYBER SHATHI</h1>
+        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-box">
+            <h2>Welcome to Your Dashboard</h2>
+            <div class="info">
+                <p><strong>Name:</strong> <span id="username">Loading...</span></p>
+                <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+                <p><strong>User ID:</strong> <span id="user-id">Loading...</span></p>
+                <p><strong>Phone Number:</strong> <span id="user-phone">Loading...</span></p>
+                <p><strong>Your Form ID:</strong> <span id="user-form-id">Loading...</span></p>
+                <p><strong>Login Time:</strong> <span id="login-time">Loading...</span></p>
+                <p><strong>Current Time:</strong> <span id="current-time">Loading...</span></p>
+                <p><strong>Total Forms Submitted:</strong> <span id="total-forms">0</span></p>
+                <p><strong>Total Earnings (₹):</strong> <span id="total-earnings">0</span></p>
+            </div>
+
+            <button class="hb" onclick="toggleForm()">Form Added Here / आपके द्वारा भरा गया फॉर्म यहाँ जोड़ें</button>
+            <div class="form-section" id="form-section">
+                <h3>Add a New Form</h3>
+                <input id="form-name" type="text" placeholder="Form Name">
+                <input id="application-number" type="text" placeholder="Application Number">
+                <button onclick="addForm()">Submit Form</button>
+            </div>
+            <div class="card-container">
+                <!-- Card content as you already have -->
+                <div class="card">
+                    <h3>Education Loan</h3>
+                    <button onclick="handleClick('Dashboard')">Fill Loan Form</button>
+                </div>
+                <div class="card">
+                    <h3>RRB Exam Form</h3>
+                    <button onclick="handleClick('RRB')">Fill RRB Form</button>
+                </div>
+                <div class="card">
+                    <h3>Scholarship Form</h3>
+                    <button onclick="handleClick('Scholarship')">Fill Scholarship Form</button>
+                </div>
+                <div class="card">
+                    <h3>Other Exam Form</h3>
+                    <button onclick="handleClick('Notifications')">Other Exam Form</button>
+                </div>
+                <div class="card">
+                    <h3>Upload Data Form</h3>
+                    <button onclick="handleClick('Notifications')">Upload Your Fill Data</button>
+                </div>
+                <div class="card">
+                    <h3>Notifications</h3>
+                    <button onclick="handleClick('Notifications')">Check Notifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+        const firebaseConfig = {
+        FIREBASE_API_KEY=AIzaSyBW2yv1wTWDktxyd0SNhqgMNL4cv-ld4t0
+        FIREBASE_AUTH_DOMAIN=loginsystem-9e5b7.firebaseapp.com
+        FIREBASE_DATABASE_URL=https://loginsystem-9e5b7-default-rtdb.firebaseio.com
+        FIREBASE_PROJECT_ID=loginsystem-9e5b7
+        FIREBASE_STORAGE_BUCKET=loginsystem-9e5b7.appspot.com
+        FIREBASE_MESSAGING_SENDER_ID=339349560166
+        FIREBASE_APP_ID=1:339349560166:web:26fe016ee2927e854986a7
+    };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userId = user.uid;
+                get(ref(db, `users/${userId}`)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        document.getElementById("username").textContent = data.username || "Not Provided";
+                        document.getElementById("user-email").textContent = data.email || "Not Provided";
+                        document.getElementById("user-id").textContent = userId;
+                        document.getElementById("user-phone").textContent = data.phoneNumber || "Not Provided";
+                        document.getElementById("user-form-id").textContent = data.formId || "Not Provided";
+                        document.getElementById("login-time").textContent = new Date().toLocaleString();
+
+                        setInterval(() => {
+                            document.getElementById("current-time").textContent = new Date().toLocaleString();
+                        }, 1000);
+                    }
+                });
+            } else {
+                window.location.href = "Login$Register.html";
+            }
+        });
+
+        window.logoutUser = function () {
+            signOut(auth).then(() => {
+                alert("Logged out successfully");
+                window.location.href = "Login$Register.html";
+            });
+        };
+
+        window.toggleForm = function () {
+            const formSection = document.getElementById("form-section");
+            formSection.style.display = formSection.style.display === "block" ? "none" : "block";
+        };
+
+        window.addForm = function () {
+            const formName = document.getElementById("form-name").value.trim();
+            const applicationNumber = document.getElementById("application-number").value.trim();
+
+            if (!formName || !applicationNumber) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            const user = auth.currentUser;
+            if (user) {
+                const userId = user.uid;
+                get(ref(db, `users/${userId}`)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        const updatedForms = (data.totalForms || 0) + 1;
+                        const updatedEarnings = (data.totalEarnings || 0) + 5;
+
+                        update(ref(db, `users/${userId}`), {
+                            totalForms: updatedForms,
+                            totalEarnings: updatedEarnings
+                        }).then(() => {
+                            alert("Form added successfully");
+                            document.getElementById("total-forms").textContent = updatedForms;
+                            document.getElementById("total-earnings").textContent = updatedEarnings;
+                            document.getElementById("form-name").value = "";
+                            document.getElementById("application-number").value = "";
+                            toggleForm();
+                        });
+                    }
+                });
+            }
+        };
+    </script>
+
+ 
+<script>
+        function handleClick(action) {
+            switch (action) {
+                case 'Dashboard':
+                    alert('Redirect to the Education Loan Form Please Note And Keep Your Form ID Number...');
+                    window.location.href = 'EducationLoanC.html'; // Redirect to Education Loan Form
+                    // Logic for navigating to the Education Loan Form page
+                    break;
+                case 'RRB':
+                    alert('Redirect to the RRB Exam Form Please Note And Keep Your Form ID Number...');
+                     window.location.href = 'https://script.google.com/macros/s/AKfycbxe2RXcVLlD_jzvW0Nsif_omuvy7N0JQKAUBydpggQQzQm92bca8LV4IkSaEHNQR89p/exec'; // Redirect to RRB Exam Form
+                    // Logic for navigating to the RRB Exam Form page
+                    break;
+                case 'Scholarship':
+                    alert('Redirect to the Scholarship Form Please Note And Keep Your Form ID Number...');
+                    window.location.href = 'scholarshipC.html'; // Redirect to Scholarship Form
+                    // Logic for navigating to the Scholarship Form page
+                    break;
+                case 'OtherExam':
+                    alert('Navigating to the Other Exam Form...');
+                    // Logic for navigating to the Other Exam Form page
+                    break;
+                case 'UploadData':
+                    alert('Navigating to the Upload Data Form...');
+                    // Logic for navigating to the Upload Data Form page
+                    break;
+                case 'Notifications':
+                    alert('Checking Notifications...');
+                    // Logic for checking notifications
+                    break;
+                default:
+                    alert('Invalid Action');
+                    break;
+            }
+        }
+</script>
+</body>
+</html>

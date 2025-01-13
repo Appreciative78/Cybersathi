@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Submitted</title>
+  <style>
+    /* General body styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #a7ffeb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      animation: backgroundFade 5s infinite alternate;
+    }
+
+    /* Success container styling */
+    .success-container {
+      text-align: center;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      animation: popUp 0.7s ease-out;
+      width: 90%;
+      max-width: 450px;
+    }
+
+    /* Success Icon */
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #4caf50, #81c784);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 10px rgba(76, 175, 80, 0.4);
+      animation: bounce 2s infinite;
+    }
+
+    .success-icon i {
+      color: #ffffff;
+      font-size: 50px;
+    }
+
+    /* Title and Message */
+    .success-title {
+      font-size: 28px;
+      color: #333333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .success-message {
+      font-size: 16px;
+      color: #555555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .check-email {
+      font-size: 14px;
+      color: #4caf50;
+      font-style: italic;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Go Back Button */
+    .go-back-link {
+      font-size: 16px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #4caf50, #66bb6a);
+      border: none;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+    }
+
+    .go-back-link:hover {
+      background: linear-gradient(135deg, #66bb6a, #4caf50);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.6);
+    }
+
+    /* Animations */
+    @keyframes popUp {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes backgroundFade {
+      0% {
+        background: linear-gradient(135deg, #e0f7fa, #a7ffeb);
+      }
+      100% {
+        background: linear-gradient(135deg, #b2dfdb, #80cbc4);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .success-container {
+        padding: 30px;
+      }
+      .success-title {
+        font-size: 22px;
+      }
+      .success-message {
+        font-size: 14px;
+      }
+      .go-back-link {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="success-icon">
+      <i>&#10003;</i> <!-- Unicode checkmark -->
+    </div>
+    <h1 class="success-title">Form Submitted Successfully!</h1>
+    <p class="success-message">
+      Thank you for submitting your form!<br> We will get back to you shortly.
+    </p>
+    <p class="check-email">Check your email for further updates.</p>
+    <a href="javascript:history.back()" class="go-back-link">Go Back</a>
+  </div>
+
+<script type="text/javascript">
+  setTimeout(() => {
+  window.location.href = "index.html";
+}, 5000); // Redirect after 5 seconds
+
+</script>
+</body>
+</html>

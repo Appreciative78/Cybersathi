@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Shati</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .wallet {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Wallet Buttons */
+.wallet-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.wallet-buttons .btn {
+    margin: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.wallet-buttons .btn-primary {
+    background-color: #3498db;
+    border: none;
+    color: white;
+}
+
+.wallet-buttons .btn-secondary {
+    background-color: #95a5a6;
+    border: none;
+    color: white;
+}
+
+.wallet-buttons .btn:hover {
+    opacity: 0.9;
+}
+
+/* Wallet Container */
+.wallet-container {
+    display: none;
+    margin-top: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.wallet-container h4 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.wallet-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.wallet-container .btn-success {
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+    width: 100%;
+}
+
+.wallet-container .btn-success:hover {
+    opacity: 0.9;
+}
+
+/* Wallet List */
+.wallet-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.wallet-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ecf0f1;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.wallet-list .btn-danger {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.wallet-list .btn-danger:hover {
+    opacity: 0.8;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+    margin-top: 40px;
+}
+        /* Navbar Styles */
+        .navbar {
+            background-color: #1a73e8;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1020;
+            opacity: 0;
+            animation: navbarFadeIn 1s forwards;
+        }
+        @keyframes navbarFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .navbar-nav .nav-item {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: #fff;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease-in-out;
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+        .navbar-nav .nav-item .btn {
+            font-weight: 600;
+            border-radius: 50px;
+            background-color: #ffcc00;
+            color: #333;
+            padding-left: 25px;
+            padding-right: 25px;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-nav .nav-item .btn:hover {
+            background-color: #e6b800;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1500x700') center/cover no-repeat;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            animation: heroAnimation 2s ease-out;
+        }
+        @keyframes heroAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .hero .btn-primary {
+            font-size: 1.2rem;
+            padding: 10px 30px;
+            animation: buttonAnimation 1s ease-in-out;
+        }
+        @keyframes buttonAnimation {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* Section Styles */
+        .section {
+            padding: 80px 20px;
+            animation: sectionFadeIn 2s ease-in-out;
+        }
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: white;
+            animation: textFadeIn 2s ease-in-out;
+        }
+        @keyframes textFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: aboutAnimation 2s ease-in-out;
+        }
+        @keyframes aboutAnimation {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .about-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .about-content img:hover {
+            transform: scale(1.05);
+        }
+        .about-text {
+            max-width: 600px;
+            margin: 20px;
+            text-align: justify;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .services {
+            background: linear-gradient(45deg, #ff6f61, #ffcc00);
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .services .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #ffffff;
+        }
+        .services .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: formAnimation 2s ease-in-out;
+        }
+        @keyframes formAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .contact-form input, .contact-form textarea {
+            transition: all 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 5px rgba(26, 115, 232, 0.6);
+        }
+        footer {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            animation: footerAnimation 2s ease-in-out;
+        }
+        @keyframes footerAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Bottom Navbar for Mobile */
+        .bottom-navbar {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .bottom-navbar {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                background: linear-gradient(90deg, #1a73e8, #0056b3);
+                color: white;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 60px;
+                box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1020;
+            }
+            .bottom-navbar a {
+                color: white;
+                font-size: 20px;
+                text-align: center;
+                flex: 1;
+                transition: color 0.3s ease;
+            }
+            .bottom-navbar a:hover {
+                color: #ffcc00;
+            }
+            .bottom-navbar a i {
+                display: block;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Cyber Shathi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="btn" href="Login$Register.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div>
+            <h1>Welcome to Cyber Shathi</h1>
+            <p>Your trusted platform for earning ₹5 per form.</p>
+            <a href="#about" class="btn btn-primary btn-lg mt-4">Learn More</a>
+        </div>
+    </section>
+    <!-- Wallet Buttons -->
+
+    <!-- About Section -->
+    <section id="about" class="section" style="background: linear-gradient(135deg, #1a73e8, #ffcc00); color: white;">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                
+                <div class="about-text">
+                    <p>Cyber Shati is a platform designed to empower individuals with opportunities to earn through simple form-filling tasks. With a commitment to transparency, efficiency, and user satisfaction, we aim to create a community where everyone can benefit. Start your journey with us today and make every form submission count!</p>
+                    <p>साइबर साथी एक ऐसा प्लेटफॉर्म है जो लोगों को साधारण फॉर्म भरने के कार्यों के माध्यम से कमाई के अवसर प्रदान करता है। पारदर्शिता, दक्षता और उपयोगकर्ता संतुष्टि के प्रति प्रतिबद्धता के साथ, हमारा उद्देश्य एक ऐसा समुदाय बनाना है जहां हर कोई लाभ उठा सके। आज ही हमारे साथ अपनी यात्रा शुरू करें और हर फॉर्म सबमिशन को मायने दें!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <h5 class="text-primary">Form Filling</h5>
+                        <p>Earn ₹5 for every form you fill with precision and ease.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <h5 class="text-primary">Track Earnings</h5>
+                        <p>Monitor your progress, see your earnings grow in real-time, and stay motivated.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <h5 class="text-primary">24/7 Support</h5>
+                        <p>Get professional support anytime to help you with your tasks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section" style="background: linear-gradient(135deg, #ff6f61, #ffcc00); color: white;">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Cyber Shati. All Rights Reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <!-- Bottom Navbar for Mobile -->
+    <div class="bottom-navbar">
+        <a href="#home"><i class="bi bi-house-door"></i></a>
+        <a href="#services"><i class="bi bi-brightness-high"></i></a>
+        <a href="#contact"><i class="bi bi-envelope"></i></a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Ensuring smooth scroll when clicking navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <script>
+    const credentialsContainer = document.getElementById('credentialsContainer');
+    const addCredentialButton = document.getElementById('addCredential');
+
+    function loadCredentials() {
+        const credentials = JSON.parse(localStorage.getItem('credentials')) || [];
+        credentialsContainer.innerHTML = '';
+
+        credentials.forEach((credential, index) => {
+            const credentialDiv = document.createElement('div');
+            credentialDiv.classList.add('credential');
+            credentialDiv.innerHTML = `
+                <div>
+                    <strong>${credential.name}</strong><br>
+                    <a href="${credential.link}" target="_blank">${credential.link}</a><br>
+                    <small>Password: ${credential.password}</small>
+                </div>
+                <button onclick="deleteCredential(${index})">Delete</button>
+            `;
+            credentialsContainer.appendChild(credentialDiv);
+        });
+    }
+
+    function saveCredential() {
+        const name = document.getElementById('accountName').value;
+        const link = document.getElementById('accountLink').value;
+        const password = document.getElementById('accountPassword').value;
+
+        if (!name || !link || !password) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        const credentials = JSON.parse(localStorage.getItem('credentials')) || [];
+        credentials.push({ name, link, password });
+        localStorage.setItem('credentials', JSON.stringify(credentials));
+
+        document.getElementById('accountName').value = '';
+        document.getElementById('accountLink').value = '';
+        document.getElementById('accountPassword').value = '';
+
+        loadCredentials();
+    }
+
+    function deleteCredential(index) {
+        const credentials = JSON.parse(localStorage.getItem('credentials')) || [];
+        credentials.splice(index, 1);
+        localStorage.setItem('credentials', JSON.stringify(credentials));
+        loadCredentials();
+    }
+
+    addCredentialButton.addEventListener('click', saveCredential);
+    window.onload = loadCredentials;
+</script>
+
+</body>
